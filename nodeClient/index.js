@@ -1,8 +1,18 @@
 import os from "os";
 import io from "socket.io-client";
 const socket = io("http://localhost:3000");
-socket.on("connect", () => {
-  console.log("connected to server");
+socket.on("connect", (socket) => {
+  const nI = os.networkInterfaces();
+  let macA;
+
+  for (let key in nI) {
+    const isInternetFacing = !nI[key][0].internal;
+    if (isInternetFacing) {
+      macA = nI[key][0].mac;
+      break;
+    }
+  }
+  console.log(macA);
 });
 
 const cpuAverage = () => {
