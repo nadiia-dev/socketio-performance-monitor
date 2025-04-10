@@ -1,5 +1,5 @@
 const Cpu = () => {
-  return <div>Cpu</div>;
+  return <div className="cpu col-3">Cpu</div>;
 };
 
 export default Cpu;

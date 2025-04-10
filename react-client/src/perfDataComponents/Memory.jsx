@@ -1,5 +1,5 @@
 const Memory = () => {
-  return <div>Memory</div>;
+  return <div className="mem col-3">Memory</div>;
 };
 
 export default Memory;
