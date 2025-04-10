@@ -14,7 +14,7 @@ socket.on("connect", () => {
   for (let key in nI) {
     const isInternetFacing = !nI[key][0].internal;
     if (isInternetFacing) {
-      macA = nI[key][0].mac;
+      macA = nI[key][0].mac + Math.floor(Math.random() * 1000000);
       break;
     }
   }

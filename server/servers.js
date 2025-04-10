@@ -53,5 +53,5 @@ if (cluster.isMaster) {
   // setup connection with the primary process
   setupWorker(io);
 
-  socketMain(io);
+  socketMain(io, process.pid);
 }

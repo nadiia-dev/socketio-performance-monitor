@@ -5,14 +5,19 @@ import Widget from "./perfDataComponents/Widget.jsx";
 
 function App() {
   const [performanceData, setPerformanceData] = useState({});
+  const perfMachineData = {};
 
   useEffect(() => {
     socket.on("perfData", (data) => {
-      const copyPerfData = { ...performanceData };
-      copyPerfData[data.macA] = data;
-      setPerformanceData(copyPerfData);
+      perfMachineData[data.macA] = data;
     });
-  });
+  }, [perfMachineData]);
+
+  useEffect(() => {
+    setInterval(() => {
+      setPerformanceData(perfMachineData);
+    }, 1000);
+  }, [perfMachineData]);
 
   const widgets = Object.values(performanceData).map((d) => (
     <Widget data={d} key={d.macA} />
