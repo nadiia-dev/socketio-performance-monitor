@@ -72,7 +72,7 @@ const performanceLoadData = () =>
     const freeMem = os.freemem(); //in bytes
     // - memory useage
     const usedMem = totalMem - freeMem;
-    const memUseage = Math.floor((usedMem / totalMem) * 100) / 100; //2 decimal places
+    const memUsage = Math.floor((usedMem / totalMem) * 100) / 100; //2 decimal places
     // - OS type
     const osType = os.type() === "Darwin" ? "Mac" : os.type();
 
@@ -91,7 +91,7 @@ const performanceLoadData = () =>
       freeMem,
       totalMem,
       usedMem,
-      memUseage,
+      memUsage,
       osType,
       upTime,
       cpuType,

@@ -8,7 +8,7 @@ const Widget = ({ data }) => {
     freeMem,
     totalMem,
     usedMem,
-    memUseage,
+    memUsage,
     osType,
     upTime,
     cpuType,
@@ -19,7 +19,7 @@ const Widget = ({ data }) => {
   } = data;
 
   const cpuData = { cpuLoad };
-  const memData = { freeMem, totalMem, usedMem, memUseage };
+  const memData = { freeMem, totalMem, usedMem, memUsage };
   const infoData = { macA, osType, upTime, cpuType, cpuSpeed, numCores };
   return (
     <div className="widget row justify-content-evenly">
