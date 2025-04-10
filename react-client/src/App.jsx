@@ -14,7 +14,11 @@ function App() {
       setPerformanceData(copyPerfData);
     });
   });
-  return <Widget />;
+
+  const widgets = Object.values(performanceData).map((d) => (
+    <Widget data={d} key={d.macA} />
+  ));
+  return <div>{widgets}</div>;
 }
 
 export default App;
