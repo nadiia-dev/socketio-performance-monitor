@@ -12,7 +12,7 @@ export const socketMain = (io) => {
     socket.emit("welcome", "Welcome!");
 
     socket.on("perfData", (perfData) => {
-      console.log(perfData);
+      io.to("reactClient").emit("perfData", perfData);
     });
   });
 };
