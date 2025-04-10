@@ -38,7 +38,12 @@ if (cluster.isMaster) {
   console.log(`Worker ${process.pid} started`);
 
   const httpServer = http.createServer();
-  const io = new Server(httpServer);
+  const io = new Server(httpServer, {
+    cors: {
+      origin: "http://localhost:5173",
+      credentials: true,
+    },
+  });
 
   // use the cluster adapter
   io.adapter(createAdapter());
