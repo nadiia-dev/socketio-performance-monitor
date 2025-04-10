@@ -1,7 +1,13 @@
 import os from "os";
 import io from "socket.io-client";
-const socket = io("http://localhost:3000");
-socket.on("connect", (socket) => {
+const options = {
+  auth: {
+    token: "ksooqwpw32018182mdmmdi330303kksd",
+  },
+};
+const socket = io("http://localhost:3000", options);
+
+socket.on("connect", () => {
   const nI = os.networkInterfaces();
   let macA;
 
@@ -12,7 +18,16 @@ socket.on("connect", (socket) => {
       break;
     }
   }
-  console.log(macA);
+
+  const perfDataInterval = setInterval(async () => {
+    const perfData = await performanceLoadData();
+    perfData.macA = macA;
+    socket.emit("perfData", perfData);
+  }, 1000);
+
+  socket.on("disconnect", () => {
+    clearInterval(perfDataInterval);
+  });
 });
 
 const cpuAverage = () => {
@@ -21,7 +36,7 @@ const cpuAverage = () => {
   let totalMs = 0; //total milliseconds
 
   cpus.forEach((aCore) => {
-    for (mode in aCore.times) {
+    for (let mode in aCore.times) {
       totalMs += aCore.times[mode];
     }
     idleMs += aCore.times.idle;
