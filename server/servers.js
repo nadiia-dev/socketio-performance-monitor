@@ -4,6 +4,8 @@ import { Server } from "socket.io";
 import { cpus } from "os";
 import { setupMaster, setupWorker } from "@socket.io/sticky";
 import { createAdapter, setupPrimary } from "@socket.io/cluster-adapter";
+import dotenv from "dotenv";
+dotenv.config();
 
 import { socketMain } from "./socketMain.js";
 
@@ -26,7 +28,11 @@ if (cluster.isMaster) {
     serialization: "advanced",
   });
 
-  httpServer.listen(3000);
+  const PORT = process.env.PORT || 3000;
+
+  httpServer.listen(PORT, "0.0.0.0", () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
 
   for (let i = 0; i < numCPUs; i++) {
     cluster.fork();
@@ -42,7 +48,7 @@ if (cluster.isMaster) {
   const httpServer = http.createServer();
   const io = new Server(httpServer, {
     cors: {
-      origin: "http://localhost:5173",
+      origin: process.env.REACT_CLIENT_URL,
       credentials: true,
     },
   });

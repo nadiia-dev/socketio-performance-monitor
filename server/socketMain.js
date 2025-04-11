@@ -2,9 +2,9 @@ export const socketMain = (io, pid) => {
   io.on("connection", (socket) => {
     let machineMacA;
     const auth = socket.handshake.auth;
-    if (auth.token === "ksooqwpw32018182mdmmdi330303kksd") {
+    if (auth.token === process.env.AUTH_NODE_CLIENT_TOKEN) {
       socket.join("nodeClient");
-    } else if (auth.token === "2910dk92scp02d11mdmmdi330303kksd") {
+    } else if (auth.token === process.env.AUTH_REACT_CLIENT_TOKEN) {
       socket.join("reactClient");
     } else {
       socket.disconnect();
