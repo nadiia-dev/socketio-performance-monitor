@@ -9,6 +9,9 @@ on:
         description: "Server URL"
         required: true
         default: "https://socketio-performance-monitor.onrender.com"
+  push:
+    paths:
+      - "nodeClient/**"
 
 jobs:
   run-client:
@@ -24,10 +27,11 @@ jobs:
           node-version: "20"
 
       - name: Install dependencies
-        run: npm install
+        run: cd nodeClient && npm install
 
       - name: Run node client
         run: |
+          cd nodeClient
           npm run start
         env:
           SERVER_URL: ${{ secrets.SERVER_URL }}
