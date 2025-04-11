@@ -8,6 +8,7 @@ export const socketMain = (io, pid) => {
       socket.join("reactClient");
     } else {
       socket.disconnect();
+      console.log("disconnected");
     }
     console.log(`Someone connected to ${process.pid}`);
     socket.emit("welcome", "Welcome!");
