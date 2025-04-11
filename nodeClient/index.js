@@ -1,11 +1,14 @@
 import os from "os";
 import io from "socket.io-client";
+import dotenv from "dotenv";
+dotenv.config();
+
 const options = {
   auth: {
-    token: "ksooqwpw32018182mdmmdi330303kksd",
+    token: process.env.AUTH_TOKEN,
   },
 };
-const socket = io("http://localhost:3000", options);
+const socket = io(process.env.SERVER_URL, options);
 
 socket.on("connect", () => {
   const nI = os.networkInterfaces();
